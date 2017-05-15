@@ -2,17 +2,10 @@
 //  MultipartyLayout.swift
 //  7.Multiparty-UICollectionView
 //
-//  Created by Roberto Perez Cubero on 17/04/2017.
-//  Copyright © 2017 tokbox. All rights reserved.
+//  Created by Adam Ullman <adam@tokbox.com>
 //
 
 import UIKit
-
-extension Int {
-    var isEven: Bool {
-        return self % 2 == 0
-    }
-}
 
 class MultipartyLayout: UICollectionViewLayout {
     fileprivate var cache = [UICollectionViewLayoutAttributes]()
@@ -30,6 +23,10 @@ class MultipartyLayout: UICollectionViewLayout {
         let height = Int(collectionView?.superview?.bounds.size.height ?? 0)
         
         if views != cachedNumberOfViews || width != cachedWidth || height != cachedHeight {
+            if width != cachedWidth || height != cachedHeight {
+                // We changed dimensions
+                collectionView?.reloadData()
+            }
             cache.removeAll()
         }
         
